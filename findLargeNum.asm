@@ -2,6 +2,7 @@
 .STACK 100H
 .DATA
 S DB 10,13,'LARGER NUM IS $'
+P DB 10,13,'EQULA $'
 .CODE 
 MAIN PROC
     MOV AX,@DATA
@@ -16,7 +17,8 @@ MAIN PROC
     MOV BH,AL
     
     CMP BL,BH
-    JGE L1
+    JE L2
+    JG L1
     
     MOV AH,9
     LEA DX,S
@@ -26,6 +28,13 @@ MAIN PROC
     MOV DL,BH
     INT 21H
     JMP EXIT
+    
+    L2:
+    MOV AH,9
+    LEA DX,P 
+    INT 21H
+    JMP EXIT
+    
     
     L1:
     MOV AH,9
